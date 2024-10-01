@@ -52,7 +52,6 @@ defmodule StoreApi.MixProject do
       {:bandit, "~> 1.5"},
       {:pbkdf2_elixir, "~> 2.0"},
       {:joken, "~> 2.6"},
-      {:dataloader, "~> 1.0.0"}
     ]
   end
 
