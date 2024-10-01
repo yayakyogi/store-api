@@ -1,6 +1,7 @@
 defmodule StoreApi.ProductsTest do
   use StoreApi.DataCase
 
+  alias StoreApi.Repo
   alias StoreApi.Products
 
   describe "products" do
@@ -11,7 +12,7 @@ defmodule StoreApi.ProductsTest do
     @invalid_attrs %{name: nil, description: nil, price: nil, stock: nil}
 
     test "list_products/0 returns all products" do
-      product = product_fixture()
+      product = product_fixture() |> Repo.preload([:category, :store])
       assert Products.list_products() == [product]
     end
 
