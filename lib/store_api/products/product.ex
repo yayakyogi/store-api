@@ -19,7 +19,7 @@ defmodule StoreApi.Products.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :price, :stock, :store_id, :category_id])
-    |> validate_required([:name, :description, :price, :stock, :store_id, :category_id])
+    |> cast(attrs, [:name, :description, :price, :stock])
+    |> validate_required([:name, :description, :price, :stock])
   end
 end
