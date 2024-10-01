@@ -28,8 +28,8 @@ defmodule StoreApiWeb.ProductController do
     store_id = params["store_id"]
 
     try do
-      category = Categories.get_category!(category_id)
-      store = Stores.get_store!(store_id)
+      Categories.get_category!(category_id)
+      Stores.get_store!(store_id)
 
       with{:ok, %Product{} = product} <- Products.create_product(params) do
         render(conn, :show, %{product: product})

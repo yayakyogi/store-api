@@ -4,15 +4,26 @@ defmodule StoreApiWeb.ProductJSON do
   def list(%{products: products}) do
     %{
       success: true,
-      products: for(product <- products, do: data(product))
+      products: for(product <- products, do: data_list(product))
     }
   end
 
   def show(%{product: product}) do
-    %{success: true, product: data(product)}
+    %{
+      success: true,
+      product:  %{
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stock: product.stock,
+        inserted_at: product.inserted_at,
+        updated_at: product.updated_at,
+      }
+    }
   end
 
-  def data(%Product{} = product) do
+  def data_list(%Product{} = product) do
     %{
       id: product.id,
       name: product.name,
@@ -20,7 +31,15 @@ defmodule StoreApiWeb.ProductJSON do
       price: product.price,
       stock: product.stock,
       inserted_at: product.inserted_at,
-      updated_at: product.updated_at
+      updated_at: product.updated_at,
+      store: %{
+        id: product.store.id,
+        name: product.store.name
+      },
+      category: %{
+        id: product.category.id,
+        name: product.category.name
+      }
     }
   end
 end

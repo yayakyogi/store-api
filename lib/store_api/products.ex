@@ -19,6 +19,8 @@ defmodule StoreApi.Products do
   """
   def list_products do
     Repo.all(Product)
+    |> Repo.preload(:store)
+    |> Repo.preload(:category)
   end
 
   @doc """
