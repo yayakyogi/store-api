@@ -8,7 +8,7 @@ defmodule StoreApiWeb.AuthController do
   action_fallback StoreApiWeb.FallbackController
 
   def ping(conn, _params) do
-    render(conn, :message, %{success: true, message: "Connected"})
+    conn |> json(%{api: "Store API"})
   end
 
   def register(conn, params) do
