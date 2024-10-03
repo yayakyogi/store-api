@@ -3,6 +3,6 @@ defmodule StoreApiWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert %{"success" => true, "message" => "Connected"} == json_response(conn, 200)
+    assert %{"api" => "Store API"} == json_response(conn, 200)
   end
 end
