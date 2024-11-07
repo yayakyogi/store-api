@@ -60,8 +60,16 @@ defmodule StoreApiWeb.Router do
       post "/", ProductController, :create
       put "/:id", ProductController, :update
       delete "/:id", ProductController, :delete
+      post "/upload", ProductController, :upload
     end
   end
+
+  # scope "/api" do
+  #   pipe_through :api
+
+  #   forward "/graphql", Absinthe.Plug.GraphiQL, schema: StoreApiWeb.Schema
+  #   forward "/", Absinthe.Plug, schema: StoreApiWeb.Schema
+  # end
 
   scope "/", StoreApiWeb do
     pipe_through :browser

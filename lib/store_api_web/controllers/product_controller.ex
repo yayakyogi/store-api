@@ -62,4 +62,29 @@ defmodule StoreApiWeb.ProductController do
       Ecto.NoResultsError -> {:error, :not_found}
     end
   end
+
+  def upload(conn, %{"file" => uploads}) do
+    filename = uploads.filename
+    path = uploads.path
+    timestamp = DateTime.utc_now() |> DateTime.to_unix(:millisecond);
+
+   if String.ends_with?(filename , [".jpg", ".png"]) do
+    upload_dir = "priv/static/uploads"
+
+    File.mkdir_p!(upload_dir)
+
+    file_path = Path.join(upload_dir, filename)
+
+    case File.cp(path, file_path) do
+      :ok ->
+        json(conn, %{status: "ok", path: file_path})
+      {:error, reason} ->
+        json(conn ,%{status: "error", reason: reason})
+    end
+    else
+      conn
+      |> put_status(:bad_request)
+      |> json(%{error: "Only .jpg and .png files are allowed."})
+   end
+  end
 end
