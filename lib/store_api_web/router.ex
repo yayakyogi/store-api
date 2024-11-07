@@ -34,12 +34,6 @@ defmodule StoreApiWeb.Router do
   end
 
   scope "/api/v1", StoreApiWeb do
-    pipe_through :auth
-
-    # get "/", AuthController, :get
-  end
-
-  scope "/api/v1", StoreApiWeb do
     pipe_through [:auth, :role]
 
     scope "/stores" do
